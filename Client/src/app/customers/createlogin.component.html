@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row grid-container">
+      <div class="col-md-10">
+        <h1>Create New Login: </h1>
+        <p>Email</p>
+        <input type="text" class="form-control" id="email" name="email" [(ngModel)]="user.email" #firstName="ngModel" required>
+        <p>Password</p>
+        <input type="text" class="form-control" id="password" name="password" [(ngModel)]="user.password" #lastname="ngModel" required>
+        <button type="submit" class="btn btn-success" (click)="enter(email.value,password.value)">Create Account</button>
+        <a [routerLink]="['/login']"> Login Page </a>
+      </div>
+    </div>
+</div>
