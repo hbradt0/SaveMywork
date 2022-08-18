@@ -1,10 +1,11 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
-
+import { Component, Input, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { IEntry, IUser } from '../shared/interfaces';
 import { Sorter } from '../core/sorter';
 import { TrackByService } from '../core/trackby.service';
 import { DataService } from '../core/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({ 
   selector: 'createlogin', 
@@ -14,6 +15,13 @@ import { Router, ActivatedRoute } from '@angular/router';
   //an event, or when an observable fires an event ~ Victor Savkin (Angular Team)
   changeDetection: ChangeDetectionStrategy.OnPush 
 })
+
+//@NgModule({
+//    imports: [
+//      FormsModule
+//    ]
+//})
+
 export class CreateLoginComponent implements OnInit {
 
   @Input() customers: IEntry[] = [];
@@ -25,15 +33,17 @@ export class CreateLoginComponent implements OnInit {
   };
 
   constructor(
-    private dataService: DataService, private router: Router) { }
+    private dataService: DataService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
   }
   
-  enter(username: string, password: string) {
-
-    this.user.email = username;
-    this.user.password = password;
+   checkoutForm = this.formBuilder.group({
+    email: '',
+    password: ''
+  });
+  
+  enter(): void{
        this.dataService.insertUser(this.user)
         .subscribe((user: IUser) => {
           if (user) {

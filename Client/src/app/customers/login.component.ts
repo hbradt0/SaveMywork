@@ -1,10 +1,12 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
-
+import { Component, Input, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { IEntry, IUser } from '../shared/interfaces';
 import { Sorter } from '../core/sorter';
 import { TrackByService } from '../core/trackby.service';
 import { DataService } from '../core/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'login',
@@ -14,6 +16,11 @@ import { Router, ActivatedRoute } from '@angular/router';
   //an event, or when an observable fires an event ~ Victor Savkin (Angular Team)
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
+
+
+
+
 export class LoginComponent implements OnInit {
 
   user: IUser = {
@@ -22,25 +29,28 @@ export class LoginComponent implements OnInit {
     username: '',
   };
 
+
   constructor(
-    private dataService: DataService, private router: Router) { }
+    private dataService: DataService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
   }
+  
+   checkoutForm = this.formBuilder.group({
+    email: '',
+    password: ''
+  });
+  
+  enter(): void{
+       this.dataService.insertUser(this.user)
+        .subscribe((user: IUser) => {
+          if (user) {
+            this.router.navigate(['/login']);
+          }
+          else {
+          }
+        },
+          (err) => console.log(err));
 
-  enter(username: string, password: string) {
-
-    this.user.email = username;
-    this.user.password = password;
-    this.dataService.getUser(this.user.email)
-      .subscribe((user: IUser) => {
-        if (user) {
-          this.router.navigate(['/customer']);
-        }
-        else {
-        }
-      },
-        (err) => console.log(err));
-
-  }
+    }
 }

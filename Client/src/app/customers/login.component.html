@@ -1,13 +1,26 @@
 <div class="container">
   <div class="row grid-container">
     <div class="col-md-10">
-      <h1>Create New Login: </h1>
-      <p>Email</p>
-      <input type="text" class="form-control" id="email" name="email" [(ngModel)]="user.email" #firstName="ngModel" required>
-      <p>Password</p>
-      <input type="text" class="form-control" id="password" name="password" [(ngModel)]="user.password" #lastname="ngModel" required>
-      <button type="submit" class="btn btn-success" (click)="enter(email.value,password.value)">Create Account</button>
-      <a [routerLink]="['/createlogin']"> New User </a>
+      <h1>Create Login: </h1>
+	  <form [formGroup]="checkoutForm" (ngSubmit)="enter()">
+         <div>
+    <label for="name">
+      User
+    </label>
+    <input id="name" type="text" formControlName="name">
+  </div>
+    <div>
+    <label for="password">
+      Password
+    </label>
+    <input id="password" type="text" formControlName="password">
+  </div>
+        <br />
+		<button class="button" type="submit">Login</button>
+		</form>
+      <div class="col-md-4">
+        <a class="btn btn-default" [routerLink]="['/createlogin']">Login</a>
+      </div>
     </div>
   </div>
 </div>
