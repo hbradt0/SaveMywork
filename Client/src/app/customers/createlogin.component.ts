@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 @Component({ 
   selector: 'createlogin', 
   templateUrl: './createlogin.component.html',
+  styleUrls: ['./createlogin.component.css'],
   //When using OnPush detectors, then the framework will check an OnPush 
   //component when any of its input properties changes, when it fires 
   //an event, or when an observable fires an event ~ Victor Savkin (Angular Team)
@@ -47,7 +48,7 @@ export class CreateLoginComponent implements OnInit {
        this.dataService.insertUser(this.user)
         .subscribe((user: IUser) => {
           if (user) {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/createlogin']);
           }
           else {
           }

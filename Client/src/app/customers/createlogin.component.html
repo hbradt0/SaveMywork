@@ -1,26 +1,28 @@
-<div class="container">
-  <div class="row grid-container">
-    <div class="col-md-10">
-      <h1>Create New Login: </h1>
-	  <form [formGroup]="checkoutForm" (ngSubmit)="enter()">
+<body class="createlogin">
+  <div class="container">
+    <div class="row grid-container">
+      <div class="col-md-10">
+        <h1>Create New Login: </h1>
+        <form [formGroup]="checkoutForm" (ngSubmit)="enter()">
           <div>
-    <label for="name">
-      User
-    </label>
-    <input id="name" type="text" formControlName="name">
-  </div>
-    <div>
-    <label for="password">
-      Password
-    </label>
-    <input id="password" type="text" formControlName="password">
-  </div>
-        <br />
-		<button class="button" type="submit">Login</button>
-		</form>
-      <div class="col-md-4">
-        <a class="btn btn-default" [routerLink]="['/login']">Login</a>
+            <label for="name">
+              User
+            </label>
+            <input id="name" type="text" formControlName="name">
+          </div>
+          <div>
+            <label for="password">
+              Password
+            </label>
+            <input id="password" type="text" formControlName="password">
+          </div>
+          <br />
+          <button class="button" type="submit">Login</button>
+        </form>
+        <div class="col-md-4">
+          <a class="btn btn-default" [routerLink]="['/login']">Login Page</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</body>
