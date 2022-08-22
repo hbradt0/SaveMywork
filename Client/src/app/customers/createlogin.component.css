@@ -1,2 +1,4 @@
-createlogin body {
-  background-image: src(vintage.jpg)}
+.createlogin body {
+  background-image: src(vintage.jpg);
+  background-color: #00ff21;
+}

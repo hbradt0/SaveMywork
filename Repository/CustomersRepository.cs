@@ -22,27 +22,26 @@ namespace Angular_ASPNETCore_CustomersService.Repository
 
         public async Task<List<Entries>> GetCustomersAsync()
         {
-            return await _Context.Customers.OrderBy(c => c.date)
-                                 .Include(c => c.Entry).ToListAsync();
+            return await _Context.Customers.OrderBy(c => c.entry).ToListAsync();
         }
 
         public async Task<PagingResult<Entries>> GetCustomersPageAsync(int skip, int take)
         {
-            var totalRecords = await _Context.Customers.CountAsync();
+           // var totalRecords = await _Context.Customers.CountAsync();
             var customers = await _Context.Customers
-                                 .OrderBy(c => c.date)
-                                 .Include(c => c.Entry)
+                                 //.OrderBy(c => c.entry)
+                                 //.Include(c => c.entry)
                                  .Skip(skip)
                                  .Take(take)
                                  .ToListAsync();
-            return new PagingResult<Entries>(customers, totalRecords);
+            return new PagingResult<Entries>(customers, 10);
         }
 
         public async Task<Entries> GetCustomerAsync(int id)
         {
             return await _Context.Customers
-                                 .Include(c => c.Entry)
-                                 .SingleOrDefaultAsync(c => c.Id == id);
+                                 //.Include(c => c.entry)
+                                 .SingleOrDefaultAsync(c => c.id == id);
         }
 
         public async Task<Entries> InsertCustomerAsync(Entries customer)
@@ -82,8 +81,8 @@ namespace Angular_ASPNETCore_CustomersService.Repository
             //Including orders since there's a foreign-key constraint and we need
             //to remove the orders in addition to the customer
             var customer = await _Context.Customers
-                                .Include(c => c.Entry)
-                                .SingleOrDefaultAsync(c => c.Id == id);
+                                //.Include(c => c.entry)
+                                .SingleOrDefaultAsync(c => c.id == id);
             _Context.Remove(customer);
             try
             {

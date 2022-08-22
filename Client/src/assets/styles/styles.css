@@ -28,7 +28,8 @@ th {
 }
 
 .navbar-header {
-    width: 300px;
+  width: 300px;
+  background-image: url(vintage.jpg);
 }
 
 .nav.navbar-padding {
@@ -43,7 +44,7 @@ th {
 }
 
 .navbar .nav > li.toolbar-item > a {
-    color: #9E9E9E;
+    color: #00ff90;
     font-weight:bold;
     -webkit-text-shadow: none;
     text-shadow: none;
@@ -139,12 +140,14 @@ a.navbar-brand {
     background-image: none;
 }
 
-.navbar-inner.toolbar {
-    background-color: #fafafa;
-}
+  .navbar-inner.toolbar {
+    background-color: #A020F0;
+  }
 
 footer {
-    margin-top: 10px;
+  margin-top: 10px;
+  background-color: #027FF4;
+  background-image: url(vintage.jpg);
 }
 
 .navbar-inner.footer {
@@ -153,6 +156,7 @@ footer {
     -moz-box-shadow: none;
     box-shadow: none;
     height:50px;
+    background-image:url(vintage.jpg);
 }
 
 .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {

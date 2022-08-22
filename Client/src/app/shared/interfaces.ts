@@ -3,9 +3,13 @@ import { ModuleWithProviders } from '@angular/core';
 export interface IEntry {
     id?: string;
     entry: string;
-    date: string;
+    mydate: string;
     email: string;
 }
+
+export var current: string;
+
+export { }
 
 export interface IOrder {
   id?: string;
@@ -22,6 +26,7 @@ export interface IState {
 }
 
 export interface IUser {
+    id?: string;
     username: string;
     password: string;
     email: string;

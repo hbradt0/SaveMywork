@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { DataService } from '../core/data.service';
-import { IEntry, IUser } from '../shared/interfaces';
+import { IEntry, IUser, current } from '../shared/interfaces';
 
 @Component({
   selector: 'customer-edit',
@@ -12,7 +12,7 @@ export class CustomerEditComponent implements OnInit {
 
   customer: IEntry = {
     entry: '',
-    date: '',
+    mydate: '',
     email: ''
   };
 
@@ -22,7 +22,7 @@ export class CustomerEditComponent implements OnInit {
   
   constructor(private router: Router, 
               private route: ActivatedRoute, 
-              private dataService: DataService) { }
+    private dataService: DataService) { }
 
   ngOnInit() {
     let id = this.route.snapshot.params['id'];
@@ -42,7 +42,7 @@ export class CustomerEditComponent implements OnInit {
   }
   
   submit() {
-
+    this.customer.email = current;
       if (this.customer.id) {
 
         this.dataService.updateCustomer(this.customer)

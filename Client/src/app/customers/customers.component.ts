@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 
 import { DataFilterService } from '../core/data-filter.service';
 import { DataService } from '../core/data.service';
-import { IEntry, IOrder, IPagedResults } from '../shared/interfaces';
+import { IEntry, IPagedResults, IUser, current } from '../shared/interfaces';
+import { LoginComponent } from './login.component';
 
 @Component({ 
   selector: 'customers', 
@@ -12,6 +13,7 @@ import { IEntry, IOrder, IPagedResults } from '../shared/interfaces';
 export class CustomersComponent implements OnInit {
 
   title = '';
+  currentUser: string = "";
   customers: IEntry[] = [];
   filteredCustomers: IEntry[] = [];
 
@@ -20,16 +22,17 @@ export class CustomersComponent implements OnInit {
 
   constructor(private router: Router, 
               private dataService: DataService,
-              private dataFilter: DataFilterService) { }
+    private dataFilter: DataFilterService) { }
   
   ngOnInit() {
     this.title = 'Journal Entries';
     this.getCustomersPage(1);
-  }
+    this.currentUser = current;
+   }
 
   filterChanged(filterText: string) {
     if (filterText && this.customers) {
-        let props = ['entry', 'date'];
+        let props = ['entry', 'date', 'email'];
         this.filteredCustomers = this.dataFilter.filter(this.customers, props, filterText);
     }
     else {

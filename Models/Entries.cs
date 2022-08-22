@@ -4,17 +4,16 @@ using System.ComponentModel.DataAnnotations;
 namespace Angular_ASPNETCore_CustomersService.Models {
   public class Entries
   {
-    public int Id { get; set; }
-    public string Entry { get; set; }
-    public string Email { get; set; }
-    public string date { get; set; }
+    public int id { get; set; }
+    public string entry { get; set; }
+    public string email { get; set; }
+    public string mydate { get; set; }
 
   }
-
   public class User
   {
-    public int Id { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
+    public int id { get; set; }
+    public string email { get; set; }
+    public string password { get; set; }
   }
 }

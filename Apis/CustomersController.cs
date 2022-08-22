@@ -12,12 +12,15 @@ namespace Angular_ASPNETCore_CustomersService.Apis
     [Route("api/customers")]
     public class CustomersApiController : Controller
     {
-        ICustomersRepository _CustomersRepository;
+      IUsersRepository _UsersRepository;
+      ICustomersRepository _CustomersRepository;
         ILogger _Logger;
 
-        public CustomersApiController(ICustomersRepository customersRepo, ILoggerFactory loggerFactory) {
+        public CustomersApiController(ICustomersRepository customersRepo, ILoggerFactory loggerFactory, IUsersRepository usersRepo) {
             _CustomersRepository = customersRepo;
-            _Logger = loggerFactory.CreateLogger(nameof(CustomersApiController));
+         _UsersRepository = usersRepo;
+
+        _Logger = loggerFactory.CreateLogger(nameof(CustomersApiController));
         }
 
         // GET api/customers
@@ -97,7 +100,7 @@ namespace Angular_ASPNETCore_CustomersService.Apis
                 {
                     return BadRequest(new ApiResponse { Status = false });
                 }
-                return CreatedAtRoute("GetCustomerRoute", new { id = newCustomer.Id },
+                return CreatedAtRoute("GetCustomerRoute", new { id = newCustomer.id },
                         new ApiResponse { Status = true, Customer = newCustomer });
             }
             catch (Exception exp)
@@ -107,8 +110,39 @@ namespace Angular_ASPNETCore_CustomersService.Apis
             }
         }
 
-        // PUT api/customers/5
-        [HttpPut("{id}")]
+
+      // POST api/customers
+      [HttpPost]
+      // [ValidateAntiForgeryToken]
+      [ProducesResponseType(typeof(ApiResponse), 201)]
+      [ProducesResponseType(typeof(ApiResponse), 400)]
+      public async Task<ActionResult> CreateUser([FromBody] User person)
+      {
+        if (!ModelState.IsValid)
+        {
+          return BadRequest(new ApiResponse { Status = false, ModelState = ModelState });
+        }
+
+        try
+        {
+          var newCustomer = await _UsersRepository.InsertCustomerAsync(person);
+          if (newCustomer == null)
+          {
+            return BadRequest(new ApiResponse { Status = false });
+          }
+          return CreatedAtRoute("GetUserRoute", new { id = newCustomer.id },
+                  new ApiResponse { Status = true, user = newCustomer });
+        }
+        catch (Exception exp)
+        {
+          _Logger.LogError(exp.Message);
+          return BadRequest(new ApiResponse { Status = false });
+        }
+      }
+
+
+    // PUT api/customers/5
+    [HttpPut("{id}")]
         // [ValidateAntiForgeryToken]
         [ProducesResponseType(typeof(ApiResponse), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, NgModule } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { IEntry, IUser } from '../shared/interfaces';
+import { IEntry, IUser, current } from '../shared/interfaces';
 import { Sorter } from '../core/sorter';
 import { TrackByService } from '../core/trackby.service';
 import { DataService } from '../core/data.service';
@@ -18,10 +18,6 @@ import { FormGroup } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-
-
-
-
 export class LoginComponent implements OnInit {
 
   user: IUser = {
@@ -30,6 +26,7 @@ export class LoginComponent implements OnInit {
     username: '',
   };
 
+  public currentUser: string = '';
 
   constructor(
     private dataService: DataService, private router: Router, private formBuilder: FormBuilder) { }
@@ -43,10 +40,11 @@ export class LoginComponent implements OnInit {
   });
   
   enter(): void{
-       this.dataService.insertUser(this.user)
+    this.dataService.getUser(this.user.email)
         .subscribe((user: IUser) => {
           if (user) {
-            this.router.navigate(['/createlogin']);
+            this.currentUser = current;
+            this.router.navigate(['/customers']);
           }
           else {
           }

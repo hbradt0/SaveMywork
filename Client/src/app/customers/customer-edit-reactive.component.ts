@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { DataService } from '../core/data.service';
-import { IEntry, IState } from '../shared/interfaces';
+import { IEntry, IUser } from '../shared/interfaces';
 import { ValidationService } from '../shared/validation.service';
 
 @Component({
@@ -18,10 +18,9 @@ export class CustomerEditReactiveComponent implements OnInit {
   }
   customer: IEntry = {
     entry: '',
-    date: '',
+    mydate: '',
     email: ''
   };
-  states: IState[] = [];
   errorMessage = '';
   deleteMessageEnabled: boolean = false;
   operationText: string = 'Insert';
@@ -38,7 +37,6 @@ export class CustomerEditReactiveComponent implements OnInit {
       this.getCustomer(id);
     }
 
-    this.getStates();
     this.buildForm();
   }
 
@@ -54,12 +52,8 @@ export class CustomerEditReactiveComponent implements OnInit {
   buildForm() {
     this.customerForm = this.formBuilder.group({
         entry:    [this.customer.entry, Validators.required],
-        date:   [this.customer.date, Validators.required],
+        date:   [this.customer.mydate, Validators.required],
       });
-  }
-
-  getStates() {
-    this.dataService.getStates().subscribe((states: IState[]) => this.states = states);
   }
   
   submit({ value, valid }: { value: IEntry, valid: boolean }) {

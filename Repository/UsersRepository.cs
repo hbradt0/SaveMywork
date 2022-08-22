@@ -22,16 +22,16 @@ namespace Angular_ASPNETCore_CustomersService.Repository
 
         public async Task<List<User>> GetCustomersAsync()
         {
-            return await _Context.Users.OrderBy(c => c.Email)
-                                 .Include(c => c.Password).ToListAsync();
+            return await _Context.Users.OrderBy(c => c.email)
+                                 .Include(c => c.password).ToListAsync();
         }
 
         public async Task<PagingResult<User>> GetCustomersPageAsync(int skip, int take)
         {
             var totalRecords = await _Context.Customers.CountAsync();
             var customers = await _Context.Users
-                                 .OrderBy(c => c.Email)
-                                 .Include(c => c.Password)
+                                 .OrderBy(c => c.email)
+                                 .Include(c => c.password)
                                  .Skip(skip)
                                  .Take(take)
                                  .ToListAsync();
@@ -41,8 +41,8 @@ namespace Angular_ASPNETCore_CustomersService.Repository
         public async Task<User> GetCustomerAsync(String email)
         {
             return await _Context.Users
-                                 .Include(c => c.Email)
-                                 .SingleOrDefaultAsync(c => c.Email == email);
+                                 .Include(c => c.email)
+                                 .SingleOrDefaultAsync(c => c.email == email);
         }
 
         public async Task<User> InsertCustomerAsync(User customer)
@@ -82,8 +82,8 @@ namespace Angular_ASPNETCore_CustomersService.Repository
             //Including orders since there's a foreign-key constraint and we need
             //to remove the orders in addition to the customer
             var customer = await _Context.Users
-                                .Include(c => c.Email)
-                                .SingleOrDefaultAsync(c => c.Email == email);
+                                .Include(c => c.email)
+                                .SingleOrDefaultAsync(c => c.email == email);
             _Context.Remove(customer);
             try
             {

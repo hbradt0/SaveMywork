@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -78,7 +78,7 @@ namespace Angular_ASPNETCore_CustomersService
                            .WithExposedHeaders("X-InlineCount")));
 
             services.AddScoped<ICustomersRepository, CustomersRepository>();
-            services.AddScoped<IStatesRepository, StatesRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddTransient<CustomersDbSeeder>();
         }
 
