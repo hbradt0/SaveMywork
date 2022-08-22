@@ -2,7 +2,7 @@
   <header>
       <h3>
           <span class="glyphicon glyphicon-user"></span>
-          {{ customer.entry }} {{ customer.date }}
+          {{ customer.entry }} {{ customer.mydate }}
       </h3>
   </header>
   <br />
@@ -14,7 +14,7 @@
     </div>
     <div class="form-group">
       <label>Date</label>
-      <input type="text" class="form-control" name="date" [(ngModel)]="customer.date" #lastName="ngModel" required>
+      <input type="text" class="form-control" name="mydate" [(ngModel)]="customer.mydate" #lastName="ngModel" required>
       <div class="alert alert-danger">Date is required</div>
     </div>
  <br />
